@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-1f0+r2!qk3@l7i_ffp(aql00f7=0lv+!2)13zp70(u5&i-%l!j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://web-production-5dced.up.railway.app"]
 
 
 # Application definition
@@ -118,7 +118,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'user'
 
 MEDIA_URL = '/media/'
@@ -132,7 +132,7 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-5dced.up.railway.app/"
+    "https://web-production-5dced.up.railway.app"
 ]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
