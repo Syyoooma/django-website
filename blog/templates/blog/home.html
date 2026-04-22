@@ -1,0 +1,54 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+    {% for post in news %}
+    <div class="alert alert-light">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|striptags|truncatechars:100 }}</p>
+        <div class="news-user-data">
+        <img src="{{ post.author.profile.img.url }}" alt="{{ post.author.username }}">
+            <div>
+                <span class="text-muted">Publication: {{ post.date|date:"j F Y, time: H:i:s" }} </span>
+                <p>Author: <a href="{% url 'user-news' post.author %}">{{ post.author }}</a></p>
+            </div>
+        </div>
+        <a href="{% url 'news-detail' post.id %}" class="btn btn-warning">Read more</a>
+    </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a href="{% url 'home' %}" class="btn btn-outline-danger">Main</a>
+            <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-danger">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if num == page_obj.number %}
+                <button class="btn btn-danger">{{ num }}</button>
+            {% elif num >= page_obj.number|add:'-2' and num <= page_obj.number|add:'2' %}
+                <a href="?page={{ num }}" class="btn btn-outline-danger">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-danger">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-danger">Last page</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block aside %}
+<h4 class="mt-2">Interesting posts</h4>
+<img src="https://itproger.com/img/news/x1775040983.jpg.pagespeed.ic.ErtpQGUMpy.jpg" class="img-thumbnail">
+<p>Розробники дуже часто змінюють свою роботу, особливо, в порівнянні з іншими професіями. Але чому саме програмісти змінюють роботу найчастіше?</p>
+
+<a href="https://itproger.com/ua/news/pochemu-programmisti-tak-chasto-menyayut-rabotu">
+    <button class="btn btn-warning">View</button>
+</a>
+<img src="https://itproger.com/img/news/x1775674516.jpg.pagespeed.ic.djaNpPFIOu.jpg" class="img-thumbnail" class="mt-5">
+<p>Багато хто вважає, що без власних проектів потрапити до ІТ неможливо. Але чи це так насправді, чи це просто черговий міф індустрії?</p>
+<a href="https://itproger.com/ua/news/mozhno-li-stat-razrabotchikom-bez-pet-proektov">
+    <button class="btn btn-warning">View</button>
+</a>
+{% endblock %}

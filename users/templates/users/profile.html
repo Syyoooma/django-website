@@ -1,0 +1,49 @@
+
+{% extends 'blog/base.html' %}
+{% block title %}
+User account
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+<h1>User account</h1>
+<img src="{{ user.profile.img.url }}" alt="{{ user.username }}">
+<div class="user-text">
+    <span class="username">@{{ user.username }}</span><br>
+    {% if user.email %}
+    <p><b>Email:</b> {{ user.email }}</p>
+    {% endif %}
+</div>
+
+
+</div>
+<form method="POST" enctype="multipart/form-data" class="form-register update-user mt-2">
+{% csrf_token %}
+    <div class="form-group">
+    <label>Username:</label>
+    {{ update_user_form.username }}
+</div>
+    <div class="form-group">
+    <label>Email:</label>
+    {{ update_user_form.email }}
+</div>
+    {{ profile_form.as_p }}
+
+    <button class="btn btn-warning" type="submit">Update</button>
+</form>
+{% endblock %}
+
+{% block aside %}
+<h4 class="mt-2">Interesting posts</h4>
+<img src="https://itproger.com/img/news/x1775040983.jpg.pagespeed.ic.ErtpQGUMpy.jpg" class="img-thumbnail">
+<p>Розробники дуже часто змінюють свою роботу, особливо, в порівнянні з іншими професіями. Але чому саме програмісти змінюють роботу найчастіше?</p>
+
+<a href="https://itproger.com/ua/news/pochemu-programmisti-tak-chasto-menyayut-rabotu">
+    <button class="btn btn-warning">View</button>
+</a>
+<img src="https://itproger.com/img/news/x1775674516.jpg.pagespeed.ic.djaNpPFIOu.jpg" class="img-thumbnail" class="mt-5">
+<p>Багато хто вважає, що без власних проектів потрапити до ІТ неможливо. Але чи це так насправді, чи це просто черговий міф індустрії?</p>
+<a href="https://itproger.com/ua/news/mozhno-li-stat-razrabotchikom-bez-pet-proektov">
+    <button class="btn btn-warning">View</button>
+</a>
+{% endblock %}

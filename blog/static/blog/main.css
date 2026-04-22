@@ -1,0 +1,118 @@
+body {
+    background: rgb(179, 174, 174);
+}
+.alert-light {
+    border-color: beige;
+}
+.form-register {
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid silver;
+    margin-top: 20px;
+}
+.form-register .helptext{
+    color: #b7b7b7;
+}
+.form-register ul.errorlist {
+    color: #ca5858;
+    font-weight: bold;
+}
+.form-register.auth input,
+.form-register.auth textarea{
+
+    display: block;
+    width: 96%;
+    margin-top: 5px;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 2%;
+}
+.form-exit {
+    display: inline-block;
+}
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: black;
+
+}
+.dashboard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgb(158 158 158);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+
+}
+
+.dashboard .h1 {
+    margin-bottom: 20px;
+}
+
+.dashboard img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 15px;
+}
+
+.dashboard p {
+    margin: 0;
+}
+
+.dashboard .username {
+    font-weight: bold;
+    color: #424242;
+}
+.update-user input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.update-user label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.news-user-data img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.news-user-data {
+    display: flex;
+    align-items: center;
+}
+
+.dashboard div {
+    display: flex;
+    flex-direction: column;
+}
+.update-user {
+    clear: both;
+}
+
+.update-user .form-group {
+    margin-bottom: 15px;
+}
+
+.update-user input,
+.update-user select {
+    width: 100%;
+}
+.update-user input[type="checkbox"] {
+    width: auto;
+    display: inline-block;
+    margin-left: 5px;
+}
