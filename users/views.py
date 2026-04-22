@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import UserRegisterForm, UserUpdateForm, ProfileImageForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from users.models import Profile
 
 
 def register(request):
@@ -15,7 +16,6 @@ def register(request):
             return redirect('home')
     else:
         form = UserRegisterForm()
-    form = UserRegisterForm()
     return render(request,
                   'users/register.html',
                         {'title': 'Registration',
@@ -24,6 +24,7 @@ def register(request):
 
 @login_required
 def profile(request):
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
         profile_form = ProfileImageForm(request.POST, request.FILES, instance=request.user.profile)
         update_user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -33,7 +34,7 @@ def profile(request):
             messages.success(request, f'Your account has been updated!')
             return redirect('profile')
     else:
-        profile_form = ProfileImageForm(instance=request.user.profile)
+        profile_form = ProfileImageForm(instance=user_profile)
         update_user_form = UserUpdateForm(instance=request.user)
 
     data = {
