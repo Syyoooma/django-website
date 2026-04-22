@@ -26,3 +26,14 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse ('news-detail', kwargs={'pk':self.pk})
+
+from django.db import models
+
+class ContactMessage(models.Model):
+    subject = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.subject

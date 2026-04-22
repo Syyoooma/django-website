@@ -3,6 +3,13 @@ from .models import News
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.mail import send_mail
+from django.conf import settings
+from django.views.generic.edit import FormView
+from django.contrib import messages
+from django.urls import reverse_lazy
+from .forms import ContactForm
+from .models import ContactMessage
 
 
 class ShowNewsView(ListView):
@@ -91,7 +98,30 @@ class DeleteNewsView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+class ContactView(FormView):
+    template_name = 'blog/contacts.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contacts')
 
-def contacts(request):
+    def form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        email = form.cleaned_data['email']
+        message = form.cleaned_data['message']
 
-    return render(request, 'blog/contacts.html', {'title': 'Title contacts'})
+        ContactMessage.objects.create(
+            subject=subject,
+            email=email,
+            message=message
+        )
+
+        send_mail(
+            subject,
+            f"Повідомлення від: {email}:\n\n{message}",
+            settings.EMAIL_HOST_USER,
+            [settings.EMAIL_HOST_USER],
+            fail_silently=False,
+        )
+
+        messages.success(self.request, 'Сообщение успешно отправлено!')
+        return super().form_valid(form)
+

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm, UserUpdateForm, ProfileImageForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileImageForm, ContactForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
+
 
 
 def register(request):
@@ -42,3 +43,4 @@ def profile(request):
         'update_user_form': update_user_form,
     }
     return render(request, 'users/profile.html', data)
+
